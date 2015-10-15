@@ -6,9 +6,7 @@ RestGate
    :target: https://travis-ci.org/cloudnative/restgate-py
    :alt: Travis Build Status
 
-.. image:: https://coveralls.io/repos/cloudnative/restgate-py/badge.svg?branch=master&service=github
-  :target: https://coveralls.io/github/cloudnative/restgate-py?branch=master
-  :alt: Code Coverage
+.. image:: https://coveralls.io/repos/cloudnative/restgate-py/badge.svg?branch=master&service=github :target: https://coveralls.io/github/cloudnative/restgate-py?branch=master
 
 Python library for communicating with a RESTful API hosted on AWS API Gateway
 
