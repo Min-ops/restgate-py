@@ -7,7 +7,7 @@ RestGate
    :alt: Build Status
 
 
-[INSERT HERE]
+Python library for communicating with a RESTful API hosted on AWS API Gateway
 
 
 
