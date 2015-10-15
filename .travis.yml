@@ -6,6 +6,11 @@ install:
   - pip install -r requirements.txt
   - pip install -r requirements-tests.txt
   - python setup.py develop
-script: coverage run --source=restgate /home/travis/virtualenv/python2.7.10/bin/nosetests
+before_script:
+  - pwd
+  - env
+  - which coverage
+  - which nosetests
+script: coverage run --source=restgate /home/travis/virtualenv/python2.7.10/bin/coverage
 after_success:
   coveralls
