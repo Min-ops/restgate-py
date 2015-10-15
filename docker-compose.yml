@@ -1,0 +1,5 @@
+---
+  restgate:
+    build: .
+    volumes:
+      - .:/restgate
