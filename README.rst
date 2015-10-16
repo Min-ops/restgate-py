@@ -48,6 +48,17 @@ The Python source code for RestGate is available on GitHub:
 https://github.com/cloudnative/restgate-py
 
 
+Developing
+----------
+
+A really nice TDD flow can be created by running
+
+::
+
+    docker-compose run restgate sniffer -x--rednose
+
+
+
 About CloudNative
 -----------------
 
