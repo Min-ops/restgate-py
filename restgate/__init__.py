@@ -24,12 +24,12 @@ __author__ = 'Peter Sankauskas'
 __email__ = 'info@cloudnative.io'
 __description__ = 'Library for using a RESTful API hosted on AWS API Gateway'
 __url__ = 'https://github.com/cloudnative/restgate-py'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 LOG = logging.getLogger(__name__)
 
 
-class RestGate:
+class RestGate(object):
     """Library for interacting with a RESTful AWS Gateway API.
     """
 
