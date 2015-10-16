@@ -6,9 +6,10 @@ RestGate
    :target: https://travis-ci.org/cloudnative/restgate-py
    :alt: Travis Build Status
 
-.. image:: https://coveralls.io/repos/cloudnative/restgate-py/badge.svg?branch=master&service=github :target: https://coveralls.io/github/cloudnative/restgate-py?branch=master
+.. image:: https://coveralls.io/repos/cloudnative/restgate-py/badge.svg?branch=master&service=github
+   :target: https://coveralls.io/github/cloudnative/restgate-py?branch=master
 
-Python library for communicating with a RESTful API hosted on AWS API Gateway
+RestGate is a python library for communicating with a RESTful API hosted on AWS API Gateway.
 
 
 
@@ -19,7 +20,7 @@ You can add RestGate using the usual PyPI channels. Example:
 
 ::
 
-    sudo pip install restgate
+    pip install restgate
 
 You can find the package details here: https://pypi.python.org/pypi/restgate
 
@@ -42,7 +43,7 @@ Can be found here: https://github.com/cloudnative/restgate-py/wiki
 Source Code
 -----------
 
-The Python source code for Resgate is available on GitHub:
+The Python source code for RestGate is available on GitHub:
 
 https://github.com/cloudnative/restgate-py
 
@@ -50,7 +51,7 @@ https://github.com/cloudnative/restgate-py
 About CloudNative
 -----------------
 
-[INSERT HERE]
+`CloudNative <https://cloudnative.io/>`__ is on a mission to codify the best practices for running a service in the cloud. If you are looking for help with AWS, please contact us.
 
 
 License

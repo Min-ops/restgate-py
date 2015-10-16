@@ -23,7 +23,20 @@ from setuptools import setup, find_packages
 
 
 ROOT = os.path.dirname(__file__)
-VERSION_RE = re.compile(r'''__version__ = ['"]([0-9.]+)['"]''')
+META_FILE = open(os.path.join(ROOT, 'restgate', '__init__.py')).read()
+
+
+def find_meta(meta):
+    """
+    Extract __*meta*__ from META_FILE.
+    """
+    meta_match = re.search(
+        r"^__{meta}__ = ['\"]([^'\"]*)['\"]".format(meta=meta),
+        META_FILE, re.M
+    )
+    if meta_match:
+        return meta_match.group(1)
+    raise RuntimeError("Unable to find __{meta}__ string.".format(meta=meta))
 
 
 requires = [
@@ -31,31 +44,26 @@ requires = [
 ]
 
 
-def get_version():
-    init = open(os.path.join(ROOT, 'restgate', '__init__.py')).read()
-    return VERSION_RE.search(init).group(1)
-
-
 setup(
     name='restgate',
-    version=get_version(),
-    description=(
-        'Python library for communicating with a RESTful API hosted on AWS API'
-        'Gateway'),
+    version=find_meta('version'),
+    description=find_meta("description"),
     long_description=open('README.rst').read(),
-    author='Peter Sankauskas',
-    author_email='info@cloudnative.io',
-    url='https://github.com/cloudnative/restgate-py',
+    author=find_meta('author'),
+    author_email=find_meta('email'),
+    url=find_meta('url'),
+    maintainer=find_meta("author"),
+    maintainer_email=find_meta("email"),
     packages=find_packages(exclude=['tests*']),
     install_requires=requires,
-    license=open("LICENSE").read(),
+    license='Apache License, Version 2.0',
     classifiers=(
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Natural Language :: English',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7'
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.5'
     ),
     zip_safe=False,
