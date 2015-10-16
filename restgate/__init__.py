@@ -21,7 +21,10 @@ import logging
 import requests
 
 __author__ = 'Peter Sankauskas'
-__version__ = '0.0.1'
+__email__ = 'info@cloudnative.io'
+__description__ = 'Library for using a RESTful API hosted on AWS API Gateway'
+__url__ = 'https://github.com/cloudnative/restgate-py'
+__version__ = '0.1.0'
 
 LOG = logging.getLogger(__name__)
 
