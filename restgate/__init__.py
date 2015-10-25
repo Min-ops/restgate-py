@@ -27,7 +27,7 @@ __author__ = 'Peter Sankauskas'
 __email__ = 'info@cloudnative.io'
 __description__ = 'Library for using a RESTful API hosted on AWS API Gateway'
 __url__ = 'https://github.com/cloudnative/restgate-py'
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 LOG = logging.getLogger(__name__)
 
@@ -88,7 +88,7 @@ class RestGate(object):
         headers are applied and errors are handled
 
         Note:
-            This does not do retried yet. It should
+            This does not do retried yet. It should.
         """
 
         headers = kwargs.get('headers', {})
@@ -116,6 +116,9 @@ class RestGate(object):
         if resp.status_code != requests.codes.ok:
             LOG.warning('Bad response received from {}: Status: {}'.format(
                 url, resp.status_code))
-            resp.raise_for_status()
+            try:
+                resp.raise_for_status()
+            except requests.exceptions.HTTPError as e:
+                raise restgate.exceptions.HTTPError(e)
 
         return resp
