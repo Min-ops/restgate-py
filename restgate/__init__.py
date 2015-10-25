@@ -20,11 +20,14 @@ import logging
 
 import requests
 
+import restgate.exceptions
+
+
 __author__ = 'Peter Sankauskas'
 __email__ = 'info@cloudnative.io'
 __description__ = 'Library for using a RESTful API hosted on AWS API Gateway'
 __url__ = 'https://github.com/cloudnative/restgate-py'
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 LOG = logging.getLogger(__name__)
 
@@ -97,7 +100,7 @@ class RestGate(object):
             resp = requests.request(method, url, **kwargs)
         except requests.exceptions.ConnectionError as e:
             LOG.warning('Could not connect to {}. Error: {}'.format(url, e))
-            return self._error(e)
+            raise restgate.exceptions.ConnectionError(e)
         except requests.exceptions.HTTPError as e:
             LOG.warning(
                 'Invalid HTTP response received from {}. Error: {}'.format(

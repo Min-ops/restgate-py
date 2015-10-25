@@ -17,6 +17,7 @@ import unittest
 import responses
 
 import restgate
+import restgate.exceptions
 from restgate import RestGate
 
 
@@ -68,3 +69,8 @@ class TestRestGate(unittest.TestCase):
         self.assertEqual(type(res), dict)
         self.assertEqual(res['id'], 1)
         self.assertEqual(res['field2'], 'val2')
+
+    def test_connection_error(self):
+        with self.assertRaises(restgate.exceptions.ConnectionError) as cm:
+            # TODO Figure out how to mock a ConnectionError with responses
+            self.rg.get('res', 1)
