@@ -83,3 +83,12 @@ class TestRestGate(unittest.TestCase):
 
         with self.assertRaises(restgate.exceptions.ConnectionError) as cm:
             self.rg.get('res', 1)
+
+    @responses.activate
+    def test_restgate_http_error(self):
+        responses.add(
+            responses.GET, 'http://example.com/res/1',
+            status=500)
+
+        with self.assertRaises(restgate.exceptions.HTTPError) as cm:
+            self.rg.get('res', 1)
