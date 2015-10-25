@@ -105,13 +105,13 @@ class RestGate(object):
             LOG.warning(
                 'Invalid HTTP response received from {}. Error: {}'.format(
                     url, e))
-            return self._error(e)
+            raise restgate.exceptions.HTTPError(e)
         except requests.exceptions.Timeout as e:
             LOG.warning('Timed out connecting to {}. Error: {}'.format(url, e))
-            return self._error(e)
+            raise restgate.exceptions.Timeout(e)
         except requests.exceptions.TooManyRedirects as e:
             LOG.warning('Too many redirects for {}. Error: {}'.format(url, e))
-            return self._error(e)
+            raise restgate.exceptions.TooManyRedirects(e)
 
         if resp.status_code != requests.codes.ok:
             LOG.warning('Bad response received from {}: Status: {}'.format(
@@ -119,7 +119,3 @@ class RestGate(object):
             resp.raise_for_status()
 
         return resp
-
-    def _error(self, exception):
-        # TODO Something a little more graceful
-        raise exception
