@@ -14,6 +14,7 @@
 
 import unittest
 
+import requests
 import responses
 
 import restgate
@@ -70,7 +71,15 @@ class TestRestGate(unittest.TestCase):
         self.assertEqual(res['id'], 1)
         self.assertEqual(res['field2'], 'val2')
 
-    def test_restgate_error(self):
-        with self.assertRaises(restgate.exceptions.RestgateError) as cm:
-            # TODO Figure out how to mock different types of errors
+    @responses.activate
+    def test_restgate_connection_error(self):
+        def request_callback(request):
+            raise requests.exceptions.ConnectionError
+
+        responses.add_callback(
+            responses.GET, 'http://example.com/res/1',
+            callback=request_callback
+        )
+
+        with self.assertRaises(restgate.exceptions.ConnectionError) as cm:
             self.rg.get('res', 1)
