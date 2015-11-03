@@ -27,7 +27,7 @@ __author__ = 'Peter Sankauskas'
 __email__ = 'info@cloudnative.io'
 __description__ = 'Library for using a RESTful API hosted on AWS API Gateway'
 __url__ = 'https://github.com/cloudnative/restgate-py'
-__version__ = '0.1.3'
+__version__ = '0.2.0'
 
 LOG = logging.getLogger(__name__)
 
@@ -68,10 +68,37 @@ class RestGate(object):
 
         Args:
             resource (str): The name of the resource to details for
-            id (str): The ID of the resource
+            resource_id (str): The ID of the resource
         """
         url = '{}/{}/{}'.format(self.endpoint, resource, resource_id)
         resp = self._send_request('get', url, **kwargs)
+        return resp.json()
+
+    def post(self, resource, resource_data, **kwargs):
+        """Creates a new resource
+
+        Args:
+            resource (str): The name of the resource to create
+            resource_data (dict): The key/values pairs to store in the resource
+        """
+        url = '{}/{}'.format(self.endpoint, resource)
+        kwargs['json'] = resource_data
+        kwargs['headers'] = {'Content-Type': 'application/json'}
+        resp = self._send_request('post', url, **kwargs)
+        return resp.json()
+
+    def put(self, resource, resource_id, resource_data, **kwargs):
+        """Updates an existing resource
+
+        Args:
+            resource (str): The name of the resource to update
+            resource_id (str): The ID of the resource to update
+            resource_data (dict): The key/values pairs to store in the resource
+        """
+        url = '{}/{}/{}'.format(self.endpoint, resource, resource_id)
+        kwargs['json'] = resource_data
+        kwargs['headers'] = {'Content-Type': 'application/json'}
+        resp = self._send_request('put', url, **kwargs)
         return resp.json()
 
     def _default_headers(self):

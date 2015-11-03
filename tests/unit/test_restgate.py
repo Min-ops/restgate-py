@@ -72,6 +72,32 @@ class TestRestGate(unittest.TestCase):
         self.assertEqual(res['field2'], 'val2')
 
     @responses.activate
+    def test_post(self):
+        responses.add(
+            responses.POST, 'http://example.com/res',
+            body='{"id": 1, "field1": "val1", "field2": "val2"}',
+            status=200)
+
+        res = self.rg.post('res', {'field1': 'val1', 'field2': 'val2'})
+        self.assertEqual(type(res), dict)
+        self.assertEqual(res['id'], 1)
+        self.assertEqual(res['field1'], 'val1')
+        self.assertEqual(res['field2'], 'val2')
+
+    @responses.activate
+    def test_put(self):
+        responses.add(
+            responses.PUT, 'http://example.com/res/123',
+            body='{"id": 123, "field1": "val1", "field2": "val3"}',
+            status=200)
+
+        res = self.rg.put('res', 123, {'field1': 'val1', 'field2': 'val3'})
+        self.assertEqual(type(res), dict)
+        self.assertEqual(res['id'], 123)
+        self.assertEqual(res['field1'], 'val1')
+        self.assertEqual(res['field2'], 'val3')
+
+    @responses.activate
     def test_restgate_connection_error(self):
         def request_callback(request):
             raise requests.exceptions.ConnectionError
